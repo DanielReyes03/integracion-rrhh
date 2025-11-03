@@ -1,17 +1,17 @@
 ﻿
 namespace Capa_Vista_Vacaciones
 {
-    partial class Vacaciones
+    partial class ucVacaciones
     {
-        /// <summary>
-        /// Required designer variable.
+        /// <summary> 
+        /// Variable del diseñador necesaria.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
+        /// <summary> 
+        /// Limpiar los recursos que se estén usando.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,16 +21,17 @@ namespace Capa_Vista_Vacaciones
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Código generado por el Diseñador de componentes
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// <summary> 
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido de este método con el editor de código.
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vacaciones));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucVacaciones));
             this.Pnl_encabezado = new System.Windows.Forms.Panel();
+            this.Lbl_Nomina = new System.Windows.Forms.Label();
             this.Gpb_Vacaciones = new System.Windows.Forms.GroupBox();
             this.Btn_Eliminar = new System.Windows.Forms.Button();
             this.Btn_Modificar = new System.Windows.Forms.Button();
@@ -39,7 +40,6 @@ namespace Capa_Vista_Vacaciones
             this.Cbo_NombreE = new System.Windows.Forms.ComboBox();
             this.Lbl_NomE = new System.Windows.Forms.Label();
             this.Dvg_HoraE = new System.Windows.Forms.DataGridView();
-            this.Lbl_Nomina = new System.Windows.Forms.Label();
             this.Pnl_encabezado.SuspendLayout();
             this.Gpb_Vacaciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dvg_HoraE)).BeginInit();
@@ -52,8 +52,18 @@ namespace Capa_Vista_Vacaciones
             this.Pnl_encabezado.Dock = System.Windows.Forms.DockStyle.Top;
             this.Pnl_encabezado.Location = new System.Drawing.Point(0, 0);
             this.Pnl_encabezado.Name = "Pnl_encabezado";
-            this.Pnl_encabezado.Size = new System.Drawing.Size(816, 100);
-            this.Pnl_encabezado.TabIndex = 0;
+            this.Pnl_encabezado.Size = new System.Drawing.Size(821, 100);
+            this.Pnl_encabezado.TabIndex = 1;
+            // 
+            // Lbl_Nomina
+            // 
+            this.Lbl_Nomina.AutoSize = true;
+            this.Lbl_Nomina.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Nomina.Location = new System.Drawing.Point(16, 42);
+            this.Lbl_Nomina.Name = "Lbl_Nomina";
+            this.Lbl_Nomina.Size = new System.Drawing.Size(109, 27);
+            this.Lbl_Nomina.TabIndex = 5;
+            this.Lbl_Nomina.Text = "Nominas";
             // 
             // Gpb_Vacaciones
             // 
@@ -65,10 +75,10 @@ namespace Capa_Vista_Vacaciones
             this.Gpb_Vacaciones.Controls.Add(this.Lbl_NomE);
             this.Gpb_Vacaciones.Controls.Add(this.Dvg_HoraE);
             this.Gpb_Vacaciones.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Gpb_Vacaciones.Location = new System.Drawing.Point(0, 106);
+            this.Gpb_Vacaciones.Location = new System.Drawing.Point(3, 106);
             this.Gpb_Vacaciones.Name = "Gpb_Vacaciones";
             this.Gpb_Vacaciones.Size = new System.Drawing.Size(802, 354);
-            this.Gpb_Vacaciones.TabIndex = 4;
+            this.Gpb_Vacaciones.TabIndex = 5;
             this.Gpb_Vacaciones.TabStop = false;
             this.Gpb_Vacaciones.Text = "Vacaciones";
             // 
@@ -97,7 +107,6 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Modificar.Text = "Modificar";
             this.Btn_Modificar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Modificar.UseVisualStyleBackColor = true;
-            this.Btn_Modificar.Click += new System.EventHandler(this.Btn_Modificar_Click);
             // 
             // Btn_Soli
             // 
@@ -111,7 +120,6 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Soli.Text = "Solicitar";
             this.Btn_Soli.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Soli.UseVisualStyleBackColor = true;
-            this.Btn_Soli.Click += new System.EventHandler(this.Btn_Soli_Click);
             // 
             // Btn_buscar
             // 
@@ -125,7 +133,6 @@ namespace Capa_Vista_Vacaciones
             this.Btn_buscar.Text = "Buscar";
             this.Btn_buscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_buscar.UseVisualStyleBackColor = true;
-            this.Btn_buscar.Click += new System.EventHandler(this.Btn_buscar_Click);
             // 
             // Cbo_NombreE
             // 
@@ -155,26 +162,15 @@ namespace Capa_Vista_Vacaciones
             this.Dvg_HoraE.Size = new System.Drawing.Size(776, 245);
             this.Dvg_HoraE.TabIndex = 7;
             // 
-            // Lbl_Nomina
-            // 
-            this.Lbl_Nomina.AutoSize = true;
-            this.Lbl_Nomina.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Nomina.Location = new System.Drawing.Point(16, 42);
-            this.Lbl_Nomina.Name = "Lbl_Nomina";
-            this.Lbl_Nomina.Size = new System.Drawing.Size(109, 27);
-            this.Lbl_Nomina.TabIndex = 5;
-            this.Lbl_Nomina.Text = "Nominas";
-            this.Lbl_Nomina.Click += new System.EventHandler(this.Lbl_Nomina_Click);
-            // 
-            // Vacaciones
+            // ucVacaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 478);
             this.Controls.Add(this.Gpb_Vacaciones);
             this.Controls.Add(this.Pnl_encabezado);
-            this.Name = "Vacaciones";
-            this.Text = "Form1";
+            this.Name = "ucVacaciones";
+            this.Size = new System.Drawing.Size(821, 478);
+            this.Load += new System.EventHandler(this.ucVacaciones_Load);
             this.Pnl_encabezado.ResumeLayout(false);
             this.Pnl_encabezado.PerformLayout();
             this.Gpb_Vacaciones.ResumeLayout(false);
@@ -187,6 +183,7 @@ namespace Capa_Vista_Vacaciones
         #endregion
 
         private System.Windows.Forms.Panel Pnl_encabezado;
+        private System.Windows.Forms.Label Lbl_Nomina;
         private System.Windows.Forms.GroupBox Gpb_Vacaciones;
         private System.Windows.Forms.Button Btn_Eliminar;
         private System.Windows.Forms.Button Btn_Modificar;
@@ -195,6 +192,5 @@ namespace Capa_Vista_Vacaciones
         private System.Windows.Forms.ComboBox Cbo_NombreE;
         private System.Windows.Forms.Label Lbl_NomE;
         private System.Windows.Forms.DataGridView Dvg_HoraE;
-        private System.Windows.Forms.Label Lbl_Nomina;
     }
 }

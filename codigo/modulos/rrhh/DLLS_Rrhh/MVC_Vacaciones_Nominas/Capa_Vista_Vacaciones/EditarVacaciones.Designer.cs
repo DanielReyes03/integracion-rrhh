@@ -30,8 +30,6 @@ namespace Capa_Vista_Vacaciones
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditarVacaciones));
-            this.Pnl_encabezado = new System.Windows.Forms.Panel();
-            this.Lbl_Nomina = new System.Windows.Forms.Label();
             this.Gpb_EditarV = new System.Windows.Forms.GroupBox();
             this.Dtp_FechaF = new System.Windows.Forms.DateTimePicker();
             this.Lbl_FechaFinal = new System.Windows.Forms.Label();
@@ -43,31 +41,12 @@ namespace Capa_Vista_Vacaciones
             this.Lbl_Dias = new System.Windows.Forms.Label();
             this.Lbl_FechaInicio = new System.Windows.Forms.Label();
             this.Lbl_Empleado = new System.Windows.Forms.Label();
-            this.Pnl_encabezado.SuspendLayout();
+            this.Pnl_encabezado = new System.Windows.Forms.Panel();
+            this.Lbl_Nomina = new System.Windows.Forms.Label();
             this.Gpb_EditarV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nud_Dias)).BeginInit();
+            this.Pnl_encabezado.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Pnl_encabezado
-            // 
-            this.Pnl_encabezado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.Pnl_encabezado.Controls.Add(this.Lbl_Nomina);
-            this.Pnl_encabezado.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Pnl_encabezado.Location = new System.Drawing.Point(0, 0);
-            this.Pnl_encabezado.Name = "Pnl_encabezado";
-            this.Pnl_encabezado.Size = new System.Drawing.Size(800, 100);
-            this.Pnl_encabezado.TabIndex = 0;
-            // 
-            // Lbl_Nomina
-            // 
-            this.Lbl_Nomina.AutoSize = true;
-            this.Lbl_Nomina.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Nomina.Location = new System.Drawing.Point(14, 38);
-            this.Lbl_Nomina.Name = "Lbl_Nomina";
-            this.Lbl_Nomina.Size = new System.Drawing.Size(109, 27);
-            this.Lbl_Nomina.TabIndex = 0;
-            this.Lbl_Nomina.Text = "Nominas";
-            this.Lbl_Nomina.Click += new System.EventHandler(this.Lbl_Nomina_Click);
             // 
             // Gpb_EditarV
             // 
@@ -82,13 +61,13 @@ namespace Capa_Vista_Vacaciones
             this.Gpb_EditarV.Controls.Add(this.Lbl_FechaInicio);
             this.Gpb_EditarV.Controls.Add(this.Lbl_Empleado);
             this.Gpb_EditarV.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Gpb_EditarV.Location = new System.Drawing.Point(19, 106);
+            this.Gpb_EditarV.Location = new System.Drawing.Point(18, 99);
             this.Gpb_EditarV.Name = "Gpb_EditarV";
             this.Gpb_EditarV.Size = new System.Drawing.Size(769, 358);
-            this.Gpb_EditarV.TabIndex = 12;
+            this.Gpb_EditarV.TabIndex = 15;
             this.Gpb_EditarV.TabStop = false;
             this.Gpb_EditarV.Text = "Editar Vacaciones";
-            this.Gpb_EditarV.Enter += new System.EventHandler(this.Gpb_EditarV_Enter_1);
+//            this.Gpb_EditarV.Enter += new System.EventHandler(this.Gpb_EditarV_Enter);
             // 
             // Dtp_FechaF
             // 
@@ -145,7 +124,6 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Regresar.Text = "Regresar";
             this.Btn_Regresar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Regresar.UseVisualStyleBackColor = true;
-            this.Btn_Regresar.Click += new System.EventHandler(this.Btn_Regresar_Click);
             // 
             // Btn_Guardar
             // 
@@ -159,7 +137,6 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Guardar.Text = "Guardar";
             this.Btn_Guardar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Guardar.UseVisualStyleBackColor = true;
-            this.Btn_Guardar.Click += new System.EventHandler(this.Btn_Guardar_Click);
             // 
             // Lbl_Dias
             // 
@@ -191,27 +168,47 @@ namespace Capa_Vista_Vacaciones
             this.Lbl_Empleado.TabIndex = 7;
             this.Lbl_Empleado.Text = "Empleado";
             // 
+            // Pnl_encabezado
+            // 
+            this.Pnl_encabezado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.Pnl_encabezado.Controls.Add(this.Lbl_Nomina);
+            this.Pnl_encabezado.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_encabezado.Location = new System.Drawing.Point(0, 0);
+            this.Pnl_encabezado.Name = "Pnl_encabezado";
+            this.Pnl_encabezado.Size = new System.Drawing.Size(800, 100);
+            this.Pnl_encabezado.TabIndex = 14;
+//            this.Pnl_encabezado.Paint += new System.Windows.Forms.PaintEventHandler(this.Pnl_encabezado_Paint);
+            // 
+            // Lbl_Nomina
+            // 
+            this.Lbl_Nomina.AutoSize = true;
+            this.Lbl_Nomina.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Nomina.Location = new System.Drawing.Point(14, 38);
+            this.Lbl_Nomina.Name = "Lbl_Nomina";
+            this.Lbl_Nomina.Size = new System.Drawing.Size(109, 27);
+            this.Lbl_Nomina.TabIndex = 0;
+            this.Lbl_Nomina.Text = "Nominas";
+            // 
             // EditarVacaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 491);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.Gpb_EditarV);
             this.Controls.Add(this.Pnl_encabezado);
             this.Name = "EditarVacaciones";
-            this.Text = "Form2";
-            this.Pnl_encabezado.ResumeLayout(false);
-            this.Pnl_encabezado.PerformLayout();
+            this.Text = "Form1";
             this.Gpb_EditarV.ResumeLayout(false);
             this.Gpb_EditarV.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nud_Dias)).EndInit();
+            this.Pnl_encabezado.ResumeLayout(false);
+            this.Pnl_encabezado.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel Pnl_encabezado;
         private System.Windows.Forms.GroupBox Gpb_EditarV;
         private System.Windows.Forms.DateTimePicker Dtp_FechaF;
         private System.Windows.Forms.Label Lbl_FechaFinal;
@@ -223,6 +220,7 @@ namespace Capa_Vista_Vacaciones
         private System.Windows.Forms.Label Lbl_Dias;
         private System.Windows.Forms.Label Lbl_FechaInicio;
         private System.Windows.Forms.Label Lbl_Empleado;
+        private System.Windows.Forms.Panel Pnl_encabezado;
         private System.Windows.Forms.Label Lbl_Nomina;
     }
 }

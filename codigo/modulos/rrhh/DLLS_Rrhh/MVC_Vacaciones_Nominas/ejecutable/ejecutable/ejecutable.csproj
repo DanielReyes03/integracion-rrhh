@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{40B08E4F-D873-4043-A925-C8B3DA232AD4}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Capa_Vista_Vacaciones</RootNamespace>
-    <AssemblyName>Capa_Vista_Vacaciones</AssemblyName>
+    <ProjectGuid>{6E648509-88A6-40D9-9EE3-F4E0C5303693}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ejecutable</RootNamespace>
+    <AssemblyName>ejecutable</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,51 +33,54 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Capa_Controlador_Vacaciones">
-      <HintPath>..\Capa_Controlador_Vacaciones\bin\Debug\Capa_Controlador_Vacaciones.dll</HintPath>
+    <Reference Include="Capa_Vista_Vacaciones">
+      <HintPath>..\..\Capa_Vista_Vacaciones\bin\Debug\Capa_Vista_Vacaciones.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Vacaciones.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vacaciones.Designer.cs">
-      <DependentUpon>Vacaciones.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditarVacaciones.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditarVacaciones.Designer.cs">
-      <DependentUpon>EditarVacaciones.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SolicitarVacaciones.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SolicitarVacaciones.Designer.cs">
-      <DependentUpon>SolicitarVacaciones.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EditarVacaciones.resx">
-      <DependentUpon>EditarVacaciones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SolicitarVacaciones.resx">
-      <DependentUpon>SolicitarVacaciones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vacaciones.resx">
-      <DependentUpon>Vacaciones.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

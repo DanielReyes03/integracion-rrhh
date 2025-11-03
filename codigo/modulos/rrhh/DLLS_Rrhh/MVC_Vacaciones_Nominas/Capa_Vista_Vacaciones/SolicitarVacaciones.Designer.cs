@@ -30,7 +30,6 @@ namespace Capa_Vista_Vacaciones
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolicitarVacaciones));
-            this.Pnl_encabezado = new System.Windows.Forms.Panel();
             this.Gpb_SolicitarV = new System.Windows.Forms.GroupBox();
             this.Dtp_FechaF = new System.Windows.Forms.DateTimePicker();
             this.Lbl_FechaFinal = new System.Windows.Forms.Label();
@@ -42,22 +41,12 @@ namespace Capa_Vista_Vacaciones
             this.Lbl_Dias = new System.Windows.Forms.Label();
             this.Lbl_FechaInicio = new System.Windows.Forms.Label();
             this.Lbl_Empleado = new System.Windows.Forms.Label();
+            this.Pnl_encabezado = new System.Windows.Forms.Panel();
             this.Lbl_Nomina = new System.Windows.Forms.Label();
-            this.Pnl_encabezado.SuspendLayout();
             this.Gpb_SolicitarV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nud_Dias)).BeginInit();
+            this.Pnl_encabezado.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Pnl_encabezado
-            // 
-            this.Pnl_encabezado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.Pnl_encabezado.Controls.Add(this.Lbl_Nomina);
-            this.Pnl_encabezado.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Pnl_encabezado.Location = new System.Drawing.Point(0, 0);
-            this.Pnl_encabezado.Name = "Pnl_encabezado";
-            this.Pnl_encabezado.Size = new System.Drawing.Size(800, 100);
-            this.Pnl_encabezado.TabIndex = 0;
-            this.Pnl_encabezado.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // Gpb_SolicitarV
             // 
@@ -72,10 +61,10 @@ namespace Capa_Vista_Vacaciones
             this.Gpb_SolicitarV.Controls.Add(this.Lbl_FechaInicio);
             this.Gpb_SolicitarV.Controls.Add(this.Lbl_Empleado);
             this.Gpb_SolicitarV.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Gpb_SolicitarV.Location = new System.Drawing.Point(12, 106);
+            this.Gpb_SolicitarV.Location = new System.Drawing.Point(12, 99);
             this.Gpb_SolicitarV.Name = "Gpb_SolicitarV";
             this.Gpb_SolicitarV.Size = new System.Drawing.Size(769, 358);
-            this.Gpb_SolicitarV.TabIndex = 11;
+            this.Gpb_SolicitarV.TabIndex = 14;
             this.Gpb_SolicitarV.TabStop = false;
             this.Gpb_SolicitarV.Text = "Solicitar Vacaciones";
             // 
@@ -134,7 +123,6 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Regresar.Text = "Regresar";
             this.Btn_Regresar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Regresar.UseVisualStyleBackColor = true;
-            this.Btn_Regresar.Click += new System.EventHandler(this.Btn_Regresar_Click);
             // 
             // Btn_Guardar
             // 
@@ -179,6 +167,17 @@ namespace Capa_Vista_Vacaciones
             this.Lbl_Empleado.TabIndex = 7;
             this.Lbl_Empleado.Text = "Empleado";
             // 
+            // Pnl_encabezado
+            // 
+            this.Pnl_encabezado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.Pnl_encabezado.Controls.Add(this.Lbl_Nomina);
+            this.Pnl_encabezado.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_encabezado.Location = new System.Drawing.Point(0, 0);
+            this.Pnl_encabezado.Name = "Pnl_encabezado";
+            this.Pnl_encabezado.Size = new System.Drawing.Size(800, 100);
+            this.Pnl_encabezado.TabIndex = 13;
+//            this.Pnl_encabezado.Paint += new System.Windows.Forms.PaintEventHandler(this.Pnl_encabezado_Paint);
+            // 
             // Lbl_Nomina
             // 
             this.Lbl_Nomina.AutoSize = true;
@@ -193,23 +192,22 @@ namespace Capa_Vista_Vacaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 479);
+            this.ClientSize = new System.Drawing.Size(800, 463);
             this.Controls.Add(this.Gpb_SolicitarV);
             this.Controls.Add(this.Pnl_encabezado);
             this.Name = "SolicitarVacaciones";
-            this.Text = "Form3";
-            this.Pnl_encabezado.ResumeLayout(false);
-            this.Pnl_encabezado.PerformLayout();
+            this.Text = "SolicitarVacaciones";
             this.Gpb_SolicitarV.ResumeLayout(false);
             this.Gpb_SolicitarV.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Nud_Dias)).EndInit();
+            this.Pnl_encabezado.ResumeLayout(false);
+            this.Pnl_encabezado.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel Pnl_encabezado;
         private System.Windows.Forms.GroupBox Gpb_SolicitarV;
         private System.Windows.Forms.DateTimePicker Dtp_FechaF;
         private System.Windows.Forms.Label Lbl_FechaFinal;
@@ -221,6 +219,7 @@ namespace Capa_Vista_Vacaciones
         private System.Windows.Forms.Label Lbl_Dias;
         private System.Windows.Forms.Label Lbl_FechaInicio;
         private System.Windows.Forms.Label Lbl_Empleado;
+        private System.Windows.Forms.Panel Pnl_encabezado;
         private System.Windows.Forms.Label Lbl_Nomina;
     }
 }
