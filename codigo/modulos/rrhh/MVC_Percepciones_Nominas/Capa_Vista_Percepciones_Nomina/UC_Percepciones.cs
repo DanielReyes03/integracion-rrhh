@@ -16,12 +16,11 @@ namespace Capa_Vista_Percepciones_Nomina
     {
         private readonly CatalogosControlador ctrl = new CatalogosControlador();
         private readonly MovimientosControlador _controlador = new MovimientosControlador();
+        private readonly UtilControlador _util = new UtilControlador();
 
         public Form_Percep()
         {
             InitializeComponent();
-            // No dependas del diseñador para enlazar el Load
-            // this.Load += Form_Percep_Load;  // <- ya no
         }
 
         // OnLoad es más confiable en UserControl
@@ -32,10 +31,8 @@ namespace Capa_Vista_Percepciones_Nomina
             {
                 try
                 {
-                    // ✅ NUEVO: suscribir eventos que dependen de controles ya creados
-                    Cbo_NoNomina.SelectedIndexChanged += Cbo_NoNomina_SelectedIndexChanged; // ✅ NUEVO
-
-                    CargarCombos(); // llena combos y (si hay nómina) carga el grid
+                    Cbo_NoNomina.SelectedIndexChanged += Cbo_NoNomina_SelectedIndexChanged;
+                    CargarCombos();
                 }
                 catch (Exception ex)
                 {
@@ -46,10 +43,7 @@ namespace Capa_Vista_Percepciones_Nomina
         }
 
         // Permite recargar desde el formulario padre si quieres
-        public void RefreshData()
-        {
-            CargarCombos();
-        }
+        public void RefreshData() => CargarCombos();
 
         private void CargarCombos()
         {
@@ -59,7 +53,7 @@ namespace Capa_Vista_Percepciones_Nomina
             Cbo_ConceptoNomina.ValueMember = "id_concepto_nomina";
             Cbo_ConceptoNomina.DataSource = dtConceptos;
 
-            // --- Empleados ---
+            // --- Empleados (opcional / no usado en movimientos) ---
             var dtEmpleados = ctrl.ListarEmpleados();
             Cbo_Empleado.DisplayMember = "nombre_empleado";
             Cbo_Empleado.ValueMember = "id_empleado";
@@ -75,96 +69,59 @@ namespace Capa_Vista_Percepciones_Nomina
             Cbo_Empleado.DropDownStyle = ComboBoxStyle.DropDownList;
             Cbo_NoNomina.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            // ✅ NUEVO: selección inicial y carga del grid
-            // Si quieres que NO haya selección en concepto/empleado, déjalos en -1.
+            // Sin selección inicial
             Cbo_ConceptoNomina.SelectedIndex = -1;
             Cbo_Empleado.SelectedIndex = -1;
+            Cbo_NoNomina.SelectedIndex = -1;
 
-            if (dtNominas != null && dtNominas.Rows.Count > 0)
-            {
-                // Selecciona la primera nómina disponible y carga el grid
-                Cbo_NoNomina.SelectedIndex = -1; // esto dispara SelectedIndexChanged (y carga el grid)
-            }
-            else
-            {
-                // Si no hay nóminas, limpia el grid
-                Cbo_NoNomina.SelectedIndex = -1;
-                Dvg_Detalle.DataSource = null; // ✅ NUEVO
-            }
+            // Limpiar grid si no hay nóminas
+            if (dtNominas == null || dtNominas.Rows.Count == 0)
+                Dvg_Detalle.DataSource = null;
         }
 
-        // ✅ NUEVO: recargar grid al cambiar la nómina
+        // Recargar grid al cambiar la nómina
         private void Cbo_NoNomina_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Cbo_NoNomina.SelectedValue == null) return;
             if (Cbo_NoNomina.SelectedValue.ToString() == "System.Data.DataRowView") return;
 
-            int idNomina;
-            if (int.TryParse(Cbo_NoNomina.SelectedValue.ToString(), out idNomina))
-            {
-                CargarDgvDetalle(idNomina);
-            }
+            if (int.TryParse(Cbo_NoNomina.SelectedValue.ToString(), out int idNomina))
+                CargarDgvMovimientos(idNomina);
         }
 
-        // En tu UserControl Form_Percep
-        private void CargarDgvDetalle(int idNomina)
+        // GRID: Movimientos por nómina
+        private void CargarDgvMovimientos(int idNomina)
         {
-            // Trae todos los campos de Tbl_DetallesNomina
-            var dt = _controlador.MostrarDetalleNomina_Todo(idNomina, asc: true);
+            var dt = _controlador.MostrarMovimientosPorNomina(idNomina, asc: true);
 
-            // Auto generar todas las columnas del DataTable
             Dvg_Detalle.AutoGenerateColumns = true;
             Dvg_Detalle.DataSource = null;
             Dvg_Detalle.Columns.Clear();
             Dvg_Detalle.DataSource = dt;
 
-            // Asigna nombres legibles a las columnas principales
-            if (Dvg_Detalle.Columns.Contains("Cmp_iId_DetalleNomina"))
-                Dvg_Detalle.Columns["Cmp_iId_DetalleNomina"].HeaderText = "ID Detalle";
+            // Encabezados legibles
+            if (Dvg_Detalle.Columns.Contains("id_movimiento"))
+                Dvg_Detalle.Columns["id_movimiento"].HeaderText = "ID Movimiento";
+            if (Dvg_Detalle.Columns.Contains("id_nomina"))
+                Dvg_Detalle.Columns["id_nomina"].HeaderText = "ID Nómina";
+            if (Dvg_Detalle.Columns.Contains("id_concepto_nomina"))
+                Dvg_Detalle.Columns["id_concepto_nomina"].HeaderText = "ID Concepto";
+            if (Dvg_Detalle.Columns.Contains("concepto"))
+                Dvg_Detalle.Columns["concepto"].HeaderText = "Concepto";
+            if (Dvg_Detalle.Columns.Contains("monto"))
+                Dvg_Detalle.Columns["monto"].HeaderText = "Monto";
 
-            if (Dvg_Detalle.Columns.Contains("Cmp_iId_Nomina"))
-                Dvg_Detalle.Columns["Cmp_iId_Nomina"].HeaderText = "ID Nómina";
-
-            if (Dvg_Detalle.Columns.Contains("Cmp_iId_Empleado"))
-                Dvg_Detalle.Columns["Cmp_iId_Empleado"].HeaderText = "ID Empleado";
-
-            if (Dvg_Detalle.Columns.Contains("Cmp_iAusencias_DetalleNomina"))
-                Dvg_Detalle.Columns["Cmp_iAusencias_DetalleNomina"].HeaderText = "Ausencias";
-
-            if (Dvg_Detalle.Columns.Contains("Cmp_iDiasLaborados_DetalleNomina"))
-                Dvg_Detalle.Columns["Cmp_iDiasLaborados_DetalleNomina"].HeaderText = "Días Laborados";
-
-            if (Dvg_Detalle.Columns.Contains("Cmp_dePercepciones_DetalleNomina"))
-                Dvg_Detalle.Columns["Cmp_dePercepciones_DetalleNomina"].HeaderText = "Percepciones";
-
-            if (Dvg_Detalle.Columns.Contains("Cmp_deDeducciones_DetalleNomina"))
-                Dvg_Detalle.Columns["Cmp_deDeducciones_DetalleNomina"].HeaderText = "Deducciones";
-
-            if (Dvg_Detalle.Columns.Contains("Cmp_deSueldoLiquido_DetalleNomina"))
-                Dvg_Detalle.Columns["Cmp_deSueldoLiquido_DetalleNomina"].HeaderText = "Sueldo Líquido";
-
-            // (Opcional) Ajusta ancho de columnas automáticamente
             Dvg_Detalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            // (Opcional) Ordenar ascendentemente por ID Detalle
-            if (Dvg_Detalle.Columns.Contains("Cmp_iId_DetalleNomina"))
-                Dvg_Detalle.Sort(Dvg_Detalle.Columns["Cmp_iId_DetalleNomina"], ListSortDirection.Ascending);
         }
 
-
-        private void SeleccionarFilaPorEmpleado(int idEmpleado)
+        // Seleccionar el movimiento recién insertado
+        private void SeleccionarFilaPorMovimiento(int idMovimiento)
         {
-            if (Dvg_Detalle.DataSource is DataTable dt)
+            if (Dvg_Detalle.DataSource is DataTable dt && dt.Columns.Contains("id_movimiento"))
             {
-                string colEmpleado =
-                    dt.Columns.Contains("id_empleado") ? "id_empleado" :
-                    dt.Columns.Contains("Cmp_iId_Empleado") ? "Cmp_iId_Empleado" : null;
-
-                if (colEmpleado == null) return;
-
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    if (Convert.ToInt32(dt.Rows[i][colEmpleado]) == idEmpleado)
+                    if (Convert.ToInt32(dt.Rows[i]["id_movimiento"]) == idMovimiento)
                     {
                         Dvg_Detalle.ClearSelection();
                         Dvg_Detalle.Rows[i].Selected = true;
@@ -175,24 +132,26 @@ namespace Capa_Vista_Percepciones_Nomina
             }
         }
 
-
         private void Btn_Guardar_Click(object sender, EventArgs e)
         {
-            if (Cbo_NoNomina.SelectedValue == null || Cbo_ConceptoNomina.SelectedValue == null || Cbo_Empleado.SelectedValue == null)
+            // Ya no pedimos Empleado para guardar movimientos
+            if (Cbo_NoNomina.SelectedValue == null || Cbo_ConceptoNomina.SelectedValue == null)
             {
-                MessageBox.Show("Selecciona Nómina, Concepto y Empleado.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecciona Nómina y Concepto.", "Validación",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!decimal.TryParse(Txt_Valor.Text, out var monto) || monto <= 0)
             {
-                MessageBox.Show("Ingresa un monto válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Ingresa un monto válido.", "Validación",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             int idNomina = Convert.ToInt32(Cbo_NoNomina.SelectedValue);
             int idConcepto = Convert.ToInt32(Cbo_ConceptoNomina.SelectedValue);
-            int idEmpleado = Convert.ToInt32(Cbo_Empleado.SelectedValue);
+            int nuevoIdMovimiento = 0;
 
             Conexion cn = new Conexion();
             using (OdbcConnection con = cn.conexionDB())
@@ -213,31 +172,26 @@ namespace Capa_Vista_Percepciones_Nomina
                         cmd.ExecuteNonQuery();
                     }
 
-                    // 2) Insertar detalle (sin cálculos; percepciones/deducciones NULL)
-                    string sqlDet = @"
-                        INSERT INTO `Tbl_DetallesNomina`
-                            (`Cmp_iId_Nomina`, `Cmp_iId_Empleado`,
-                             `Cmp_dePercepciones_DetalleNomina`, `Cmp_deDeducciones_DetalleNomina`)
-                        VALUES (?, ?, NULL, NULL);";
-                    using (OdbcCommand cmd = new OdbcCommand(sqlDet, con, tx))
+                    // 2) Obtener el ID insertado
+                    using (OdbcCommand cmdId = new OdbcCommand("SELECT LAST_INSERT_ID();", con, tx))
                     {
-                        cmd.Parameters.Add("p1", OdbcType.Int).Value = idNomina;
-                        cmd.Parameters.Add("p2", OdbcType.Int).Value = idEmpleado;
-                        cmd.ExecuteNonQuery();
+                        nuevoIdMovimiento = Convert.ToInt32(cmdId.ExecuteScalar());
                     }
 
                     tx.Commit();
 
-                    // 🔄 Recargar grid y resaltar al empleado
-                    CargarDgvDetalle(idNomina);
-                    SeleccionarFilaPorEmpleado(idEmpleado);
+                    // Recargar grid y resaltar el nuevo movimiento
+                    CargarDgvMovimientos(idNomina);
+                    SeleccionarFilaPorMovimiento(nuevoIdMovimiento);
 
-                    MessageBox.Show("Registro insertado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Movimiento registrado.", "Éxito",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
                     try { tx.Rollback(); } catch { /* ignore */ }
-                    MessageBox.Show("Error al insertar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error al insertar: " + ex.Message, "Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -245,25 +199,21 @@ namespace Capa_Vista_Percepciones_Nomina
                 }
             }
         }
-        private readonly UtilControlador _util = new UtilControlador();
+
         private void Btn_Eliminar_Click(object sender, EventArgs e)
         {
             var confirm = MessageBox.Show(
-                "¿Seguro que quieres eliminar todos los registros?\nEsto reiniciará el contador de ID.",
+                "¿Seguro que quieres eliminar todos los movimientos?\nEsto reiniciará el contador de ID.",
                 "Confirmar limpieza", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (confirm == DialogResult.Yes)
             {
                 try
                 {
-                    // Limpia las tablas
+                    // Limpiar solo movimientos y reiniciar contador
                     _util.TruncarTabla("Tbl_MovimientosNomina");
-                    _util.TruncarTabla("Tbl_DetallesNomina");
 
-                    // (opcional, si usas DELETE en lugar de TRUNCATE)
-                    _util.ReiniciarSiVacia("Tbl_DetallesNomina", "Cmp_iId_DetalleNomina");
-
-                    MessageBox.Show("Registros eliminados y contador reiniciado.", "Éxito",
+                    MessageBox.Show("Movimientos eliminados y contador reiniciado.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Recargar grid vacío
@@ -276,6 +226,5 @@ namespace Capa_Vista_Percepciones_Nomina
                 }
             }
         }
-
     }
 }

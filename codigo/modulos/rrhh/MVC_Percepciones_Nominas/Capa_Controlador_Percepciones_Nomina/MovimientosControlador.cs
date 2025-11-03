@@ -12,16 +12,10 @@ namespace Capa_Controlador_Percepciones_Nomina
     {
         MovimientosModelo modelo = new MovimientosModelo();
 
-        public void GuardarMovimientoYDetalle(int idNomina, int idConcepto, int idEmpleado, decimal monto)
-        {
-            modelo.InsertarMovimiento(idNomina, idConcepto, monto);
-            modelo.InsertarDetalleNomina(idNomina, idEmpleado);
-        }
-
         // Capa_Controlador_Percepciones_Nomina / MovimientosControlador.cs
-        public DataTable MostrarDetalleNomina_Todo(int idNomina, bool asc = true)
+        public DataTable MostrarMovimientosPorNomina(int idNomina, bool asc = true)
         {
-            return modelo.ObtenerDetalleNomina_Todo(idNomina, asc);
+            return modelo.ObtenerMovimientosPorNomina(idNomina, asc);
         }
 
     }
