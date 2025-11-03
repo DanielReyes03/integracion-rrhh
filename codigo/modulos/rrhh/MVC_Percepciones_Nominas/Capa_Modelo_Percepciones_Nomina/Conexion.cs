@@ -12,7 +12,7 @@ namespace Capa_Modelo_Percepciones_Nomina
             try
             {
                 // Nombre del DSN configurado en el ODBC
-                string dsn = "DSN=bd_nomina";
+                string dsn = "DSN=bd_hoteleria";
                 conexion = new OdbcConnection(dsn);
                 conexion.Open();
                 Console.WriteLine("Conexión exitosa a la base de datos.");
