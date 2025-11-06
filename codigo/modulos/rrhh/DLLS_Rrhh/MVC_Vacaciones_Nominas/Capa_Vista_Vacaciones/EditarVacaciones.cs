@@ -24,21 +24,26 @@ namespace Capa_Vista_Vacaciones
         {
             try
             {
-                var con = new Conexion().ConexionDB();
-                if (con != null)
+                using (var con = new Conexion().ConexionDB())
+                using (var cmd = new OdbcCommand(@"
+                        SELECT 
+                            Cmp_iId_Empleado AS pk_idEmpleado,
+                            CONCAT(Cmp_sNombre_Empleado, ' ', Cmp_sApellido_Empleado) AS nombre
+                        FROM tbl_empleados;", con))
+                using (var reader = cmd.ExecuteReader())
                 {
-                    string query = "SELECT pk_idEmpleado, nombre FROM tbl_empleado";
-                    OdbcCommand cmd = new OdbcCommand(query, con);
-                    OdbcDataReader reader = cmd.ExecuteReader();
-                    DataTable dt = new DataTable();
+                    var dt = new DataTable();
                     dt.Load(reader);
                     Cbo_Empleado.DataSource = dt;
                     Cbo_Empleado.DisplayMember = "nombre";
                     Cbo_Empleado.ValueMember = "pk_idEmpleado";
-                    con.Close();
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar empleados: " + ex.Message, "BD",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CargarDatos()
@@ -67,11 +72,12 @@ namespace Capa_Vista_Vacaciones
             }
 
             string resultado = controlador.EditarVacacion(idVacacion, Dtp_FechaI.Value, Dtp_FechaF.Value);
-            MessageBox.Show(resultado, "Resultado", MessageBoxButtons.OK, resultado.Contains("correctamente") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+            MessageBox.Show(resultado, "Resultado", MessageBoxButtons.OK,
+                resultado.Contains("correctamente") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
 
             if (resultado.Contains("correctamente"))
             {
-                this.Close();  // Cierra y recarga grid en Vacaciones UC
+                this.Close();
             }
         }
 
@@ -92,5 +98,8 @@ namespace Capa_Vista_Vacaciones
                 Nud_Dias.Value = 0;
             }
         }
+
+        private void Gpb_EditarV_Enter(object sender, EventArgs e) { }
+        private void Pnl_encabezado_Paint(object sender, PaintEventArgs e) { }
     }
 }

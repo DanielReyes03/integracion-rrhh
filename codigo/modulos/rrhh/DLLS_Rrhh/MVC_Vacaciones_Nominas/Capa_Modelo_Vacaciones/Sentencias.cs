@@ -6,26 +6,30 @@ namespace Capa_Modelo_Vacaciones
 {
     public class Sentencias
     {
-        private Conexion con = new Conexion();
+        private readonly Conexion con = new Conexion();
 
         // Obtener vacaciones por empleado
         public DataTable ObtenerVacaciones(int idEmpleado)
         {
-            DataTable dt = new DataTable();
-            string query = "SELECT Cmp_iId_Vacacion, Cmp_iId_Empleado, Cmp_dFechaInicio_Vacacion, Cmp_dFechaFin_Vacacion, Cmp_iDias_Vacacion, Cmp_bAprobada_Vacacion FROM tbl_vacacion WHERE Cmp_iId_Empleado = ?";
+            var dt = new DataTable();
+            const string query = @"
+                SELECT  Cmp_iId_Vacacion,
+                        Cmp_iId_Empleado,
+                        Cmp_dFechaInicio_Vacacion,
+                        Cmp_dFechaFin_Vacacion,
+                        Cmp_iDias_Vacacion,
+                        Cmp_bAprobada_Vacacion
+                FROM tbl_vacaciones
+                WHERE Cmp_iId_Empleado = ?;";
 
             try
             {
-                OdbcConnection conexion = con.ConexionDB();
-                if (conexion != null)
+                using (var conexion = con.ConexionDB())
+                using (var cmd = new OdbcCommand(query, conexion))
+                using (var da = new OdbcDataAdapter(cmd))
                 {
-                    using (OdbcCommand cmd = new OdbcCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@id", idEmpleado);
-                        OdbcDataAdapter da = new OdbcDataAdapter(cmd);
-                        da.Fill(dt);
-                    }
-                    con.CerrarConexion();
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.Int, Value = idEmpleado });
+                    da.Fill(dt);
                 }
             }
             catch (Exception ex)
@@ -38,80 +42,78 @@ namespace Capa_Modelo_Vacaciones
         // Insertar nueva solicitud
         public bool InsertarSolicitud(int idEmpleado, DateTime fechaInicio, DateTime fechaFin, int dias)
         {
-            string query = "INSERT INTO tbl_vacacion (Cmp_iId_Empleado, Cmp_dFechaInicio_Vacacion, Cmp_dFechaFin_Vacacion, Cmp_iDias_Vacacion, Cmp_bAprobada_Vacacion) VALUES (?, ?, ?, ?, 0)";
+            const string query = @"
+                INSERT INTO tbl_vacaciones
+                    (Cmp_iId_Empleado, Cmp_dFechaInicio_Vacacion, Cmp_dFechaFin_Vacacion, Cmp_iDias_Vacacion, Cmp_bAprobada_Vacacion)
+                VALUES
+                    (?, ?, ?, ?, 0);";
 
             try
             {
-                OdbcConnection conexion = con.ConexionDB();
-                if (conexion != null)
+                using (var conexion = con.ConexionDB())
+                using (var cmd = new OdbcCommand(query, conexion))
                 {
-                    using (OdbcCommand cmd = new OdbcCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@emp", idEmpleado);
-                        cmd.Parameters.AddWithValue("@ini", fechaInicio);
-                        cmd.Parameters.AddWithValue("@fin", fechaFin);
-                        cmd.Parameters.AddWithValue("@dias", dias);
-                        cmd.Parameters.AddWithValue("@aprob", 0); // 0 = No aprobada
-                        cmd.ExecuteNonQuery();
-                    }
-                    con.CerrarConexion();
-                    return true;
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.Int, Value = idEmpleado });
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.DateTime, Value = fechaInicio });
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.DateTime, Value = fechaFin });
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.Int, Value = dias });
+
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al insertar: " + ex.Message);
+                return false;
             }
-            return false;
         }
 
         // Actualizar vacación
         public bool ActualizarVacacion(int idVacacion, DateTime fechaInicio, DateTime fechaFin, int dias)
         {
-            string query = "UPDATE tbl_vacacion SET Cmp_dFechaInicio_Vacacion = ?, Cmp_dFechaFin_Vacacion = ?, Cmp_iDias_Vacacion = ? WHERE Cmp_iId_Vacacion = ?";
+            const string query = @"
+                UPDATE tbl_vacaciones
+                SET Cmp_dFechaInicio_Vacacion = ?, 
+                    Cmp_dFechaFin_Vacacion   = ?, 
+                    Cmp_iDias_Vacacion       = ?
+                WHERE Cmp_iId_Vacacion     = ?;";
 
             try
             {
-                OdbcConnection conexion = con.ConexionDB();
-                if (conexion != null)
+                using (var conexion = con.ConexionDB())
+                using (var cmd = new OdbcCommand(query, conexion))
                 {
-                    using (OdbcCommand cmd = new OdbcCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@ini", fechaInicio);
-                        cmd.Parameters.AddWithValue("@fin", fechaFin);
-                        cmd.Parameters.AddWithValue("@dias", dias);
-                        cmd.Parameters.AddWithValue("@id", idVacacion);
-                        cmd.ExecuteNonQuery();
-                    }
-                    con.CerrarConexion();
-                    return true;
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.DateTime, Value = fechaInicio });
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.DateTime, Value = fechaFin });
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.Int, Value = dias });
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.Int, Value = idVacacion });
+
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al actualizar: " + ex.Message);
+                return false;
             }
-            return false;
         }
 
         // Obtener una vacación por ID
         public DataRow ObtenerVacacionPorId(int idVacacion)
         {
-            DataTable dt = new DataTable();
-            string query = "SELECT * FROM tbl_vacacion WHERE Cmp_iId_Vacacion = ?";
+            var dt = new DataTable();
+            const string query = "SELECT * FROM tbl_vacaciones WHERE Cmp_iId_Vacacion = ?;";
 
             try
             {
-                OdbcConnection conexion = con.ConexionDB();
-                if (conexion != null)
+                using (var conexion = con.ConexionDB())
+                using (var cmd = new OdbcCommand(query, conexion))
+                using (var da = new OdbcDataAdapter(cmd))
                 {
-                    using (OdbcCommand cmd = new OdbcCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@id", idVacacion);
-                        OdbcDataAdapter da = new OdbcDataAdapter(cmd);
-                        da.Fill(dt);
-                    }
-                    con.CerrarConexion();
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.Int, Value = idVacacion });
+                    da.Fill(dt);
                 }
             }
             catch (Exception ex)
@@ -125,27 +127,23 @@ namespace Capa_Modelo_Vacaciones
         // Eliminar vacación
         public bool EliminarVacacion(int idVacacion)
         {
-            string query = "DELETE FROM tbl_vacacion WHERE Cmp_iId_Vacacion = ?";
+            const string query = "DELETE FROM tbl_vacaciones WHERE Cmp_iId_Vacacion = ?;";
 
             try
             {
-                OdbcConnection conexion = con.ConexionDB();
-                if (conexion != null)
+                using (var conexion = con.ConexionDB())
+                using (var cmd = new OdbcCommand(query, conexion))
                 {
-                    using (OdbcCommand cmd = new OdbcCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@id", idVacacion);
-                        cmd.ExecuteNonQuery();
-                    }
-                    con.CerrarConexion();
-                    return true;
+                    cmd.Parameters.Add(new OdbcParameter { OdbcType = OdbcType.Int, Value = idVacacion });
+                    int rows = cmd.ExecuteNonQuery();
+                    return rows > 0;
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al eliminar: " + ex.Message);
+                return false;
             }
-            return false;
         }
     }
 }

@@ -12,14 +12,19 @@ namespace Capa_Modelo_Vacaciones
         {
             try
             {
-                string dsn = "DSN=bd_hoteleria";
+                // Nombre EXACTO del DSN configurado en el administrador ODBC (32 bits)
+                // Verifica que sea exactamente igual: "bd_hoteleria"
+                string dsn = "DSN=bd_hoteleria;";
+
                 conexion = new OdbcConnection(dsn);
                 conexion.Open();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error al conectar a la base de datos: " + ex.Message);
+                // Puedes cambiar el mensaje si deseas
+                throw new Exception("Error al conectar a la base de datos ODBC: " + ex.Message, ex);
             }
+
             return conexion;
         }
 

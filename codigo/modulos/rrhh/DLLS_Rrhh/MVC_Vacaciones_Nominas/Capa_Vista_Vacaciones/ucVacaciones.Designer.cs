@@ -1,5 +1,4 @@
-﻿
-namespace Capa_Vista_Vacaciones
+﻿namespace Capa_Vista_Vacaciones
 {
     partial class ucVacaciones
     {
@@ -58,12 +57,12 @@ namespace Capa_Vista_Vacaciones
             // Lbl_Nomina
             // 
             this.Lbl_Nomina.AutoSize = true;
-            this.Lbl_Nomina.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Nomina.Font = new System.Drawing.Font("Rockwell", 18F);
             this.Lbl_Nomina.Location = new System.Drawing.Point(16, 42);
             this.Lbl_Nomina.Name = "Lbl_Nomina";
             this.Lbl_Nomina.Size = new System.Drawing.Size(109, 27);
             this.Lbl_Nomina.TabIndex = 5;
-            this.Lbl_Nomina.Text = "Nominas";
+            this.Lbl_Nomina.Text = "Nóminas";
             // 
             // Gpb_Vacaciones
             // 
@@ -74,7 +73,7 @@ namespace Capa_Vista_Vacaciones
             this.Gpb_Vacaciones.Controls.Add(this.Cbo_NombreE);
             this.Gpb_Vacaciones.Controls.Add(this.Lbl_NomE);
             this.Gpb_Vacaciones.Controls.Add(this.Dvg_HoraE);
-            this.Gpb_Vacaciones.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Gpb_Vacaciones.Font = new System.Drawing.Font("Rockwell", 18F);
             this.Gpb_Vacaciones.Location = new System.Drawing.Point(3, 106);
             this.Gpb_Vacaciones.Name = "Gpb_Vacaciones";
             this.Gpb_Vacaciones.Size = new System.Drawing.Size(802, 354);
@@ -84,7 +83,7 @@ namespace Capa_Vista_Vacaciones
             // 
             // Btn_Eliminar
             // 
-            this.Btn_Eliminar.Font = new System.Drawing.Font("Rockwell", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Eliminar.Font = new System.Drawing.Font("Rockwell", 9.75F);
             this.Btn_Eliminar.Image = ((System.Drawing.Image)(resources.GetObject("Btn_Eliminar.Image")));
             this.Btn_Eliminar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Btn_Eliminar.Location = new System.Drawing.Point(665, 24);
@@ -94,10 +93,11 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Eliminar.Text = "Eliminar";
             this.Btn_Eliminar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Eliminar.UseVisualStyleBackColor = true;
+            this.Btn_Eliminar.Click += new System.EventHandler(this.Btn_Eliminar_Click);
             // 
             // Btn_Modificar
             // 
-            this.Btn_Modificar.Font = new System.Drawing.Font("Rockwell", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Modificar.Font = new System.Drawing.Font("Rockwell", 9.75F);
             this.Btn_Modificar.Image = ((System.Drawing.Image)(resources.GetObject("Btn_Modificar.Image")));
             this.Btn_Modificar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Btn_Modificar.Location = new System.Drawing.Point(584, 24);
@@ -107,10 +107,11 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Modificar.Text = "Modificar";
             this.Btn_Modificar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Modificar.UseVisualStyleBackColor = true;
+            this.Btn_Modificar.Click += new System.EventHandler(this.Btn_Modificar_Click);
             // 
             // Btn_Soli
             // 
-            this.Btn_Soli.Font = new System.Drawing.Font("Rockwell", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Soli.Font = new System.Drawing.Font("Rockwell", 9.75F);
             this.Btn_Soli.Image = ((System.Drawing.Image)(resources.GetObject("Btn_Soli.Image")));
             this.Btn_Soli.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Btn_Soli.Location = new System.Drawing.Point(503, 24);
@@ -120,10 +121,11 @@ namespace Capa_Vista_Vacaciones
             this.Btn_Soli.Text = "Solicitar";
             this.Btn_Soli.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_Soli.UseVisualStyleBackColor = true;
+            this.Btn_Soli.Click += new System.EventHandler(this.Btn_Soli_Click);
             // 
             // Btn_buscar
             // 
-            this.Btn_buscar.Font = new System.Drawing.Font("Rockwell", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_buscar.Font = new System.Drawing.Font("Rockwell", 9.75F);
             this.Btn_buscar.Image = ((System.Drawing.Image)(resources.GetObject("Btn_buscar.Image")));
             this.Btn_buscar.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Btn_buscar.Location = new System.Drawing.Point(422, 24);
@@ -133,10 +135,11 @@ namespace Capa_Vista_Vacaciones
             this.Btn_buscar.Text = "Buscar";
             this.Btn_buscar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Btn_buscar.UseVisualStyleBackColor = true;
+            this.Btn_buscar.Click += new System.EventHandler(this.Btn_buscar_Click);
             // 
             // Cbo_NombreE
             // 
-            this.Cbo_NombreE.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cbo_NombreE.Font = new System.Drawing.Font("Rockwell", 12F);
             this.Cbo_NombreE.FormattingEnabled = true;
             this.Cbo_NombreE.Location = new System.Drawing.Point(246, 39);
             this.Cbo_NombreE.Name = "Cbo_NombreE";
@@ -146,7 +149,7 @@ namespace Capa_Vista_Vacaciones
             // Lbl_NomE
             // 
             this.Lbl_NomE.AutoSize = true;
-            this.Lbl_NomE.Font = new System.Drawing.Font("Rockwell", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_NomE.Font = new System.Drawing.Font("Rockwell", 18F);
             this.Lbl_NomE.Location = new System.Drawing.Point(16, 39);
             this.Lbl_NomE.Name = "Lbl_NomE";
             this.Lbl_NomE.Size = new System.Drawing.Size(224, 27);
@@ -158,9 +161,12 @@ namespace Capa_Vista_Vacaciones
             this.Dvg_HoraE.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.Dvg_HoraE.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dvg_HoraE.Location = new System.Drawing.Point(16, 92);
+            this.Dvg_HoraE.MultiSelect = false;
             this.Dvg_HoraE.Name = "Dvg_HoraE";
+            this.Dvg_HoraE.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Dvg_HoraE.Size = new System.Drawing.Size(776, 245);
             this.Dvg_HoraE.TabIndex = 7;
+            this.Dvg_HoraE.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dvg_HoraE_CellContentClick);
             // 
             // ucVacaciones
             // 

@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6E648509-88A6-40D9-9EE3-F4E0C5303693}</ProjectGuid>
+    <ProjectGuid>{5A9C58C2-C0F7-43C3-BFA8-5B4647CAC190}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ejecutable</RootNamespace>
     <AssemblyName>ejecutable</AssemblyName>
@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Capa_Vista_Vacaciones">
-      <HintPath>..\..\Capa_Vista_Vacaciones\bin\Debug\Capa_Vista_Vacaciones.dll</HintPath>
+      <HintPath>..\..\..\Capa_Vista_Vacaciones\bin\Debug\Capa_Vista_Vacaciones.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

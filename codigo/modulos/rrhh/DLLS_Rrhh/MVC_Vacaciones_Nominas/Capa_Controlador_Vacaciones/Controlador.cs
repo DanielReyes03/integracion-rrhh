@@ -6,17 +6,14 @@ namespace Capa_Controlador_Vacaciones
 {
     public class Controlador
     {
-        private Sentencias sentencias = new Sentencias();
+        private readonly Sentencias sentencias = new Sentencias();
 
         public DataTable BuscarVacaciones(int idEmpleado)
-        {
-            return sentencias.ObtenerVacaciones(idEmpleado);
-        }
+            => sentencias.ObtenerVacaciones(idEmpleado);
 
         public string SolicitarVacaciones(int idEmpleado, DateTime inicio, DateTime fin)
         {
-            if (inicio >= fin)
-                return "La fecha de inicio debe ser anterior a la fecha final.";
+            if (inicio >= fin) return "La fecha de inicio debe ser anterior a la fecha final.";
 
             int dias = (fin - inicio).Days + 1;
             bool exito = sentencias.InsertarSolicitud(idEmpleado, inicio, fin, dias);
@@ -25,8 +22,7 @@ namespace Capa_Controlador_Vacaciones
 
         public string EditarVacacion(int idVacacion, DateTime inicio, DateTime fin)
         {
-            if (inicio >= fin)
-                return "La fecha de inicio debe ser anterior a la fecha final.";
+            if (inicio >= fin) return "La fecha de inicio debe ser anterior a la fecha final.";
 
             int dias = (fin - inicio).Days + 1;
             bool exito = sentencias.ActualizarVacacion(idVacacion, inicio, fin, dias);
@@ -34,11 +30,8 @@ namespace Capa_Controlador_Vacaciones
         }
 
         public DataRow CargarVacacion(int idVacacion)
-        {
-            return sentencias.ObtenerVacacionPorId(idVacacion);
-        }
+            => sentencias.ObtenerVacacionPorId(idVacacion);
 
-        // Nuevo: Eliminar
         public string EliminarVacacion(int idVacacion)
         {
             bool exito = sentencias.EliminarVacacion(idVacacion);
